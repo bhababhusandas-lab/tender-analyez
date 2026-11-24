@@ -1,0 +1,49 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "bid-manager",
+  "run_type": "live-comparison",
+  "dataset_case": "bm_eoi_missing_terms",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "before-response-contract",
+      "scorer_version": "1.0.0",
+      "score": 68.67,
+      "passed": false,
+      "observed_gaps": [
+        "Only 3 of 5 required sections found",
+        "Only 2 of 3 required tender documents mentioned",
+        "None of 4 required experience numbers repeated"
+      ]
+    },
+    {
+      "name": "after-response-contract",
+      "scorer_version": "1.1.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "Correct and consistent CONDITIONAL BID verdict",
+        "All 5 required sections present",
+        "All 3 requested document categories present",
+        "All 4 numeric experience facts present",
+        "No forbidden unsupported claims",
+        "Required uncertainty labels present"
+      ]
+    },
+    {
+      "name": "expanded-three-verdict-suite",
+      "scorer_version": "1.2.0",
+      "case_count": 3,
+      "score": 100.0,
+      "passed": true,
+      "covered_decisions": ["BID", "NO-BID", "CONDITIONAL"],
+      "observed_strengths": [
+        "Correct opening verdict on every locked case",
+        "All required facts, figures, and sections present",
+        "No prohibited arithmetic or unsupported claims",
+        "Empty provider payloads fail over instead of crashing the run"
+      ]
+    }
+  ],
+  "note": "Synthetic locked test case. Number words and equivalent digits are normalised by scorer 1.1.0."
+}

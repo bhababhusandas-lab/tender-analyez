@@ -1,0 +1,16 @@
+.git
+# Secrets at any depth (backend/.env holds real API keys and SMTP credentials).
+**/.env
+**/.env.*
+!**/.env.example
+**/.venv
+**/venv
+**/node_modules
+**/__pycache__
+**/*.pyc
+**/*.db
+**/*.sqlite*
+**/uploads/*
+**/dist
+*.zip
+.DS_Store

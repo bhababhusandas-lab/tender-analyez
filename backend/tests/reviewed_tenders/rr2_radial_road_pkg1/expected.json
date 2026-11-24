@@ -1,0 +1,29 @@
+{
+  "name": "HGCL Radial Road 2, Package 1 (NIT 49/CGM(T)/HGCL/DGM(T)/2026-27/RR2-1)",
+  "source": "RR2 Pkg 1 bid document, NIT and BOQ (about 427k characters)",
+  "reviewed": "Facts checked against the NIT by the bid team.",
+  "facts": {
+    "Estimated Contract Value": {"amount": 12371634251},
+    "EMD Amount": {"amount": 123720000},
+    "Bid Submission Deadline": {"date": "2026-09-30", "time": "15:00"},
+    "Technical Bid Opening": {"date": "2026-09-30", "time": "15:30"},
+    "Pre-bid Meeting": {"date": "2026-09-22", "time": "11:30"},
+    "Contract Duration / Period": {"contains": ["18 months"]},
+    "Similar Work Value": {"amount": 4123800000},
+    "Liquid Assets / Credit Facility": {"amount": 2062000000},
+    "Bid Capacity Formula": {"contains": ["2AN"]},
+    "Key Personnel": {"contains": ["Project Manager: 1", "Diploma Engineer in Civil: 6"]},
+    "Key Equipment": {"contains": ["Hydraulic excavators: 6"]},
+    "Consortium / JV Conditions": {"contains": ["limited to 3 members", "joint and several"]}
+  },
+  "absent_fields": ["Technical Evaluation Marks", "Application / Tender Fee"],
+  "forbidden_amounts": {
+    "Estimated Contract Value": [123720000],
+    "EMD Amount": [12371634251]
+  },
+  "model_input": [
+    {
+      "contains": ["12,37,20,000", "30.09.2026 @ 3.00 PM", "30.09.2026 @ 3.30 PM", "2AN", "412.38", "206.20"]
+    }
+  ]
+}

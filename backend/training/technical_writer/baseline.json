@@ -1,0 +1,30 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "technical-writer",
+  "dataset_case": "tw_laptop_proposal_plan",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "reference-self-check",
+      "scorer_version": "1.0.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All required proposal content and formatting constraints preserved",
+        "Executive summary remains below 250 words",
+        "Requirement-to-evidence mapping contains more than 8 rows",
+        "Final page references held until rendering and visual QA",
+        "No invented certification, experience, testimonial, award, or page number"
+      ]
+    },
+    {
+      "name": "live-before-and-after",
+      "scorer_version": "1.0.0",
+      "score": null,
+      "passed": false,
+      "status": "pending-provider-quota",
+      "observed_gaps": ["Live scoring deferred because all configured LLM providers are out of quota"]
+    }
+  ],
+  "note": "Synthetic locked case; final proposal content and rendered page references require authorised human review."
+}

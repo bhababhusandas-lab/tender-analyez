@@ -1,0 +1,19 @@
+{
+  "baseline_date": "2026-09-30",
+  "agent": "tender-brief",
+  "dataset_case": "brief_ghi_benefit_conflicts",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "reference-answer-self-check",
+      "scorer_version": "1.0.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All 9 template sections present and in order",
+        "Both maternity and pre-hospitalisation conflicts quoted with references in section 9"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case. No live-model baseline has been recorded yet; run the script with --live to add one."
+}

@@ -1,0 +1,32 @@
+{
+  "name": "I&PR Telangana, RFP for Creative Media Agencies / digital media campaign for the global summit (Tender No. 010226/VE/2025-26)",
+  "source": "RFP for Digital Media campaign for global summit.pdf (32 pages)",
+  "reviewed": "Expert review of the generated Tender Brief: the Rs. 10,000 application fee was reported as the estimated value; consortium rules, the marks table and several mandatory documents were missing.",
+  "facts": {
+    "EMD Amount": {"amount": 1000000},
+    "Application / Tender Fee": {"amount": 10000},
+    "Bid Submission Deadline": {"date": "2026-10-03", "time": "15:00"},
+    "Technical Bid Opening": {"date": "2026-10-03", "time": "16:00"},
+    "Pre-bid Meeting": {"date": "2026-09-28", "time": "15:00"},
+    "Consortium / JV Conditions": {
+      "contains": ["up to two members", "at least 60%", "at least 51%", "jointly and severally", "consortium agreement"]
+    },
+    "Technical Evaluation Marks": {
+      "contains": ["Total 100 marks", "minimum qualifying 70 marks", "Credentials: 60", ": 40", "E. Proposed Team", ": 20"]
+    },
+    "Mandatory Documents": {
+      "contains": ["List of Skilled employees", "Latest tax paid receipts", "Application Fee of Rs 10,000", "EMD of Rs. 10,00,000", "PAN Card", "GST Certificate"]
+    },
+    "Hard Copy Submission": {"contains": ["attested copies", "original EMD", "opening of Technical Bids"]}
+  },
+  "absent_fields": ["Estimated Contract Value"],
+  "forbidden_amounts": {
+    "Estimated Contract Value": [10000, 25000, 1000000]
+  },
+  "forbidden_in_evidence_block": ["Estimated Contract Value"],
+  "model_input": [
+    {"contains": ["at least 60%", "at least 51%", "less than 70", "5:3:2", "5.16 Allocation of Work"]},
+    {"budget": 35000, "contains": ["at least 60%", "at least 51%", "minimum qualifying 70 marks"]},
+    {"budget": 35000, "evidence": false, "contains": ["60%", "51%", "70"]}
+  ]
+}

@@ -1,0 +1,22 @@
+# Run the whole app with one command:  docker compose up --build
+# Then open http://localhost:8000
+# The AI runs on Ollama. Install it on this machine, run `ollama pull qwen3:8b`,
+# and keep it running; the container reaches it at host.docker.internal.
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_PATH: /data/tender_analyst.db
+      UPLOAD_DIR: /data/uploads
+      PROVIDER_ORDER: ollama
+      OLLAMA_BASE_URL: http://host.docker.internal:11434/v1
+      OLLAMA_MODEL: qwen3:8b
+      JWT_SECRET: change-me-to-a-long-random-string
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - app_data:/data
+volumes:
+  app_data:

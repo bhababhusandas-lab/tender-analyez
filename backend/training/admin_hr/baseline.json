@@ -1,0 +1,32 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "admin-hr",
+  "dataset_case": "hr_field_team_gaps",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "reference-self-check",
+      "scorer_version": "1.0.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All staffing roles, headcounts, dates, and supplied evidence preserved",
+        "All 5 credential, statutory, background, and backup gaps identified",
+        "PF evidence separated from a legal compliance conclusion",
+        "Missing ESI evidence and statutory thresholds correctly left unverified",
+        "Conditional readiness verdict requires authorised review"
+      ]
+    },
+    {
+      "name": "live-before-and-after",
+      "scorer_version": "1.0.0",
+      "score": null,
+      "passed": false,
+      "status": "pending-provider-quota",
+      "observed_gaps": [
+        "Live scoring deferred because all configured LLM providers are out of quota"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case; current statutory conclusions and final staffing approval require authorised human review."
+}

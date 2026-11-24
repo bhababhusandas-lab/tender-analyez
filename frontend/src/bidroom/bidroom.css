@@ -1,0 +1,171 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE BID ROOM — scoped design tokens
+   ───────────────────────────────────────────────────────────────────────────
+   Straight from the UI/UX Design Brief (§3–§5). Everything is scoped under
+   `.bidroom` so this product surface carries its own visual language without
+   disturbing the rest of the tender-analyst-ai app. Dark theme ("Deck") keys off
+   the app's existing <html data-theme="dark">, so the global theme toggle just
+   works here too.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Fonts (Fraunces, Instrument Sans, IBM Plex Mono) load from index.html. */
+
+.bidroom {
+  /* Match the main product theme: ink structure, vermilion action, paper ground. */
+  --bg:#F3EEE3; --surface:#FBF8F1; --surface-2:#EAE3D4; --border:#DCD3C1;
+  --text:#16130F; --text-muted:#4A4238; --text-subtle:#6E6455;
+  --primary:#C2361A; --primary-hover:#A12C15; --primary-active:#7A2110; --primary-soft:#FDF0EB;
+  --success:#1FA971; --warning:#D9902B; --danger:#DC4B4B; --focus:#7FA0F0;
+
+  /* agents (solid) */
+  --agent-ceo:#4F46E5; --agent-bidmgr:#1E74D6; --agent-pricing:#0E8F6B;
+  --agent-legal:#A9761F; --agent-writer:#7C3AED; --agent-qa:#6E6455;
+  --agent-technical:#0C93A8; --agent-market:#D14D86; --agent-docs:#7B8794;
+  --agent-finance:#8A7A12; --agent-govt:#B04A3C;
+  --agent-adminhr:#4F46E5; --agent-it:#C026D3;
+
+  /* agents (soft chip bg — light) */
+  --agent-ceo-soft:#ECEBFC; --agent-bidmgr-soft:#E4F0FC; --agent-pricing-soft:#E1F4EE;
+  --agent-legal-soft:#F6EEDD; --agent-writer-soft:#F0E9FD; --agent-qa-soft:#EDF0F3;
+  --agent-technical-soft:#E0F3F6; --agent-market-soft:#FBE9F1; --agent-docs-soft:#EFF1F3;
+  --agent-finance-soft:#F5F1DC; --agent-govt-soft:#F7E7E4;
+  --agent-adminhr-soft:#ECEBFC; --agent-it-soft:#F9E6FB;
+
+  /* radius / spacing / elevation */
+  --r-xs:6px; --r-sm:8px; --r-md:10px; --r-lg:14px; --r-pill:999px;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.06);
+  --shadow-md:0 4px 12px rgba(16,24,40,.08);
+  --shadow-lg:0 12px 32px rgba(16,24,40,.12);
+
+  --font-display:'Fraunces',Georgia,serif;
+  --font-ui:'Instrument Sans',system-ui,-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono','SFMono-Regular',ui-monospace,monospace;
+
+  color:var(--text);
+  background:var(--bg);
+  font-family:var(--font-ui);
+  -webkit-font-smoothing:antialiased;
+}
+
+[data-theme="dark"] .bidroom {
+  --bg:#0C0B09; --surface:#1C1915; --surface-2:#16130F; --border:#2E2A24;
+  --text:#F3EEE3; --text-muted:#A39886; --text-subtle:#93897A;
+  --primary:#F0583A; --primary-hover:#F26C50; --primary-active:#E0401F; --primary-soft:rgba(240,88,58,.14);
+  --success:#3AC58C; --warning:#E0A03E; --danger:#E9635F; --focus:#5B84F0;
+
+  /* agent solids lifted ~14% for dark ground */
+  --agent-ceo:#7B72F0; --agent-bidmgr:#4E97E8; --agent-pricing:#2EB98C;
+  --agent-legal:#CE9B42; --agent-writer:#9E6BF5; --agent-qa:#8996A8;
+  --agent-technical:#33B6CB; --agent-market:#E074A6; --agent-docs:#9BA6B3;
+  --agent-finance:#B3A23A; --agent-govt:#D06E5F;
+  --agent-adminhr:#7B72F0; --agent-it:#D65AE0;
+
+  /* soft chip bg in dark = translucent tints */
+  --agent-ceo-soft:rgba(123,114,240,.16); --agent-bidmgr-soft:rgba(78,151,232,.16);
+  --agent-pricing-soft:rgba(46,185,140,.16); --agent-legal-soft:rgba(206,155,66,.16);
+  --agent-writer-soft:rgba(158,107,245,.16); --agent-qa-soft:rgba(137,150,168,.18);
+  --agent-technical-soft:rgba(51,182,203,.16); --agent-market-soft:rgba(224,116,166,.16);
+  --agent-docs-soft:rgba(155,166,179,.16); --agent-finance-soft:rgba(179,162,58,.16);
+  --agent-govt-soft:rgba(208,110,95,.16);
+  --agent-adminhr-soft:rgba(123,114,240,.16); --agent-it-soft:rgba(214,90,224,.16);
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:0 4px 14px rgba(0,0,0,.45);
+  --shadow-lg:0 14px 36px rgba(0,0,0,.55);
+}
+
+/* ── typography scale (Design Brief §4) ──────────────────────────────────── */
+.br-display { font-family:var(--font-display); font-weight:600; font-size:2.25rem; line-height:1.15; letter-spacing:-.02em; }
+.br-h1 { font-family:var(--font-display); font-weight:600; font-size:1.75rem; line-height:1.2; letter-spacing:-.018em; }
+.br-h2 { font-family:var(--font-display); font-weight:600; font-size:1.375rem; line-height:1.25; }
+.br-h3 { font-weight:600; font-size:1.125rem; line-height:1.3; }
+.br-body { font-size:.9375rem; line-height:1.55; }
+.br-strong { font-size:.9375rem; line-height:1.55; font-weight:600; }
+.br-label { font-size:.875rem; line-height:1.2; font-weight:600; }
+.br-caption { font-size:.75rem; line-height:1.3; font-weight:500; }
+.br-mono { font-family:var(--font-mono); font-size:.8125rem; line-height:1.4; font-weight:500; font-variant-numeric:tabular-nums; }
+
+/* ── the room shell ──────────────────────────────────────────────────────── */
+.bidroom * { box-sizing:border-box; }
+.bidroom ::selection { background:var(--primary-soft); }
+
+.br-focusable:focus-visible { outline:2px solid var(--focus); outline-offset:2px; border-radius:var(--r-xs); }
+.br-status { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:11px; font-weight:600; white-space:nowrap; }
+.br-status .br-presence-dot { width:7px; height:7px; border-radius:50%; background:var(--success); }
+.br-eyebrow { font-family:var(--font-mono); color:var(--primary); font-size:10px; font-weight:600; letter-spacing:.16em; }
+.br-channel-item, .br-roster-card, .br-prompt-chip { transition:background-color .15s ease,border-color .15s ease,color .15s ease,transform .15s ease; }
+.br-channel-item:hover, .br-roster-card:hover { background:var(--surface); border-color:var(--border) !important; }
+.br-prompt-chip:hover { border-color:color-mix(in srgb,var(--primary) 45%,var(--border)) !important; color:var(--primary) !important; transform:translateY(-1px); }
+.br-prompt-arrow { transform:rotate(180deg); }
+.br-composer:focus-within { border-color:color-mix(in srgb,var(--primary) 55%,var(--border)) !important; box-shadow:0 0 0 3px var(--primary-soft),var(--shadow-md) !important; }
+.br-attachments { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:8px; }
+.br-attachment { max-width:240px; display:inline-flex; align-items:center; gap:6px; padding:5px 7px 5px 9px; border:1px solid var(--border); border-radius:var(--r-sm); background:var(--surface-2); color:var(--text-muted); font-size:11px; font-weight:600; }
+.br-attachment > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.br-attachment button { display:grid; place-items:center; width:18px; height:18px; padding:0; border:0; border-radius:4px; background:transparent; color:var(--text-subtle); cursor:pointer; }
+.br-attachment button:hover { background:var(--surface); color:var(--danger); }
+.br-attachment-loading { color:var(--primary); }
+.br-document-error { color:var(--danger); font-size:11px; }
+
+/* scrollbars */
+.br-scroll { scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
+.br-scroll::-webkit-scrollbar { width:8px; height:8px; }
+.br-scroll::-webkit-scrollbar-thumb { background:var(--border); border-radius:99px; }
+.br-scroll::-webkit-scrollbar-track { background:transparent; }
+
+/* ── presence pulse — the ONE looping motion (Design Brief §9, §11) ──────── */
+@keyframes br-presence { 0%,100%{opacity:.55} 50%{opacity:1} }
+.br-presence-dot { animation:br-presence 2.4s ease-in-out infinite; }
+
+/* ── streaming caret / typing shimmer ────────────────────────────────────── */
+@keyframes br-blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.br-caret { display:inline-block; width:2px; height:1em; background:currentColor; vertical-align:text-bottom; animation:br-blink 1s step-end infinite; margin-left:1px; }
+@keyframes br-typing { 0%,60%,100%{transform:translateY(0);opacity:.4} 30%{transform:translateY(-3px);opacity:1} }
+.br-typing span { display:inline-block; width:5px; height:5px; border-radius:50%; background:currentColor; margin:0 1.5px; animation:br-typing 1.2s infinite; }
+.br-typing span:nth-child(2){ animation-delay:.15s; }
+.br-typing span:nth-child(3){ animation-delay:.3s; }
+
+/* ── message entrance (Design Brief §11: 120ms fade + 4px rise) ──────────── */
+@keyframes br-enter { from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none} }
+.br-msg-enter { animation:br-enter .12s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .br-presence-dot, .br-caret, .br-typing span, .br-msg-enter { animation:none !important; }
+}
+
+/* ── responsive (Design Brief §10 / UX spec) ─────────────────────────────── */
+.br-roster-toggle, .br-channels-toggle { display:none !important; }
+.bidroom .br-scrim { display:none; }
+
+/* ≥1280 full three-panel · 1024–1279 roster collapses · <768 channels collapse */
+@media (max-width:1279px) {
+  .bidroom .br-roster {
+    position:absolute; right:0; top:0; bottom:0; transform:translateX(100%);
+    transition:transform .2s ease-out; z-index:16;
+  }
+  .bidroom .br-roster.br-open { transform:none; box-shadow:var(--shadow-lg); }
+  .br-roster-toggle { display:inline-flex !important; }
+  .bidroom .br-scrim.br-open { display:block; }
+}
+@media (max-width:767px) {
+  .bidroom .br-channels {
+    position:absolute; left:0; top:0; bottom:0; transform:translateX(-100%);
+    transition:transform .2s ease-out; z-index:16;
+  }
+  .bidroom .br-channels.br-open { transform:none; box-shadow:var(--shadow-lg); }
+  .br-channels-toggle { display:inline-flex !important; }
+}
+
+/* When the room sits beside the product rail, collapse workstreams earlier so
+   the conversation remains comfortably wide on laptops and tablets. */
+@media (max-width:1099px) {
+  .bidroom--embedded .br-channels {
+    position:absolute; left:0; top:0; bottom:0; transform:translateX(-100%);
+    transition:transform .2s ease-out; z-index:16;
+  }
+  .bidroom--embedded .br-channels.br-open { transform:none; box-shadow:var(--shadow-lg); }
+  .bidroom--embedded .br-channels-toggle { display:inline-flex !important; }
+}
+
+@media (max-width:640px) {
+  .bidroom .br-status, .bidroom .br-mono { display:none; }
+}

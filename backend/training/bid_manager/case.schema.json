@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/bid-manager-case-v1.json",
+  "title": "Bid Manager training and evaluation case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "version", "split", "tags", "provenance", "input", "expected", "reference_answer"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^bm_[a-z0-9_]+$"},
+    "version": {"const": 1},
+    "split": {"enum": ["train", "validation", "test"]},
+    "tags": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_type", "review_status"],
+      "properties": {
+        "source_type": {"enum": ["synthetic", "anonymised-customer", "public-tender"]},
+        "source_reference": {"type": "string"},
+        "review_status": {"enum": ["draft", "expert-reviewed", "approved"]},
+        "reviewer": {"type": "string"}
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tender_text", "company_profile"],
+      "properties": {
+        "tender_text": {"type": "string", "minLength": 20},
+        "company_profile": {"type": "string", "minLength": 20}
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "must_mention", "numeric_facts", "required_sections", "must_not_claim", "require_uncertainty_label"],
+      "properties": {
+        "decision": {"enum": ["BID", "NO-BID", "CONDITIONAL"]},
+        "must_mention": {"type": "array", "items": {"type": "string"}},
+        "numeric_facts": {"type": "array", "items": {"type": "string"}},
+        "required_sections": {"type": "array", "items": {"type": "string"}},
+        "must_not_claim": {"type": "array", "items": {"type": "string"}},
+        "require_uncertainty_label": {"type": "boolean"}
+      }
+    },
+    "reference_answer": {"type": "string", "minLength": 100}
+  }
+}
+

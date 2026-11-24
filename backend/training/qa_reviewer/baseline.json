@@ -1,0 +1,35 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "qa-reviewer",
+  "dataset_case": "qa_laptop_blocked_submission",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "before-evidence-contract",
+      "scorer_version": "1.0.0",
+      "score": 66.53,
+      "passed": false,
+      "observed_gaps": [
+        "None of the 5 required review sections present",
+        "Only 1 of 4 blocking defects classified with a traceable label",
+        "Only 7 of 9 supplied numeric facts retained",
+        "A generic 100-item checklist obscured the case-specific audit"
+      ]
+    },
+    {
+      "name": "after-evidence-contract",
+      "scorer_version": "1.0.0",
+      "score": 95.14,
+      "passed": true,
+      "observed_strengths": [
+        "All 5 required audit sections present",
+        "Every supplied requirement and document covered",
+        "All 4 blocking defects identified in the response",
+        "18 evidence-linked checklist rows produced against a minimum of 10",
+        "Explicit NO-GO verdict with correction and human re-check actions",
+        "No invented tender requirements or portal-success claim detected"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case; an authorised human remains responsible for final submission approval."
+}

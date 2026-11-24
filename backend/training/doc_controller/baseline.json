@@ -1,0 +1,32 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "doc-controller",
+  "dataset_case": "dc_laptop_package_gaps",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "reference-self-check",
+      "scorer_version": "1.0.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All 10 supplied document records traced to tender requirements",
+        "All publication, deadline, freeze, expiry, and file-size facts preserved",
+        "All 4 blocking document gaps identified",
+        "Explicit NO-GO verdict and acknowledgement-proof gate present",
+        "No invented vault or submission claim"
+      ]
+    },
+    {
+      "name": "live-before-and-after",
+      "scorer_version": "1.0.0",
+      "score": null,
+      "passed": false,
+      "status": "pending-provider-quota",
+      "observed_gaps": [
+        "Live scoring deferred because all configured LLM providers are out of quota"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case; final package approval and portal submission remain human responsibilities."
+}

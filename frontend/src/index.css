@@ -1,0 +1,389 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════════════
+   THEME TOKENS
+   ───────────────────────────────────────────────────────────────────────────
+   Only surfaces and text flip between themes. Navy bands (hero, footer, the
+   sidebar rail) and saffron stay themselves in both — the brand should not
+   change colour because someone turned the lights off.
+
+   Channels rather than hex, so Tailwind's `<alpha-value>` still works:
+   `bg-panel/60` is valid.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root,
+:root[data-theme='light'] {
+  /* UNIQUE TYPE — "Editorial". Warm newsprint, ink, one vermilion. */
+  --canvas:    243 238 227;   /* Paper       #F3EEE3 — page ground          */
+  --panel:     251 248 241;   /* Sheet       #FBF8F1 — cards                */
+  --sunk:      234 227 212;   /* Newsprint   #EAE3D4 — table heads, fills   */
+  --edge:      220 211 193;   /* rule        #DCD3C1                        */
+  --edge-2:    191 179 156;   /* heavy rule  #BFB39C                        */
+  --fg:         22  19  15;   /* Ink         #16130F                        */
+  --fg-muted:   74  66  56;   /* #4A4238 — 8.9:1 on paper                   */
+  --fg-subtle: 110 100  85;   /* #6E6455 — 5.0:1 on paper                   */
+  --accent:    194  54  26;   /* Vermilion text #C2361A — 5.0:1 on paper    */
+  --accent-2:   42  63 191;   /* Ultramarine #2A3FBF — links, 7.4:1         */
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --canvas:     18  16  13;   /* #12100D — lamp-black                       */
+  --panel:      28  25  21;   /* #1C1915                                    */
+  --sunk:       12  11   9;   /* #0C0B09                                    */
+  --edge:       46  42  36;   /* #2E2A24                                    */
+  --edge-2:     68  62  53;   /* #443E35                                    */
+  --fg:        243 238 227;   /* Paper #F3EEE3                              */
+  --fg-muted:  189 179 162;   /* #BDB3A2                                    */
+  --fg-subtle: 147 137 122;   /* #93897A                                    */
+  --accent:    255 106  69;   /* #FF6A45 — vermilion lifted for dark        */
+  --accent-2:  140 156 255;   /* #8C9CFF                                    */
+  color-scheme: dark;
+}
+
+/* Sections that are navy in BOTH themes — the hero bands, the footer, the
+   sidebar rail, the run console. They re-point the tokens locally, so the same
+   `text-fg-muted` that is slate on a white card is light steel in here, and no
+   component needs to know which ground it landed on. Put this on the element
+   that owns the dark background. */
+.on-dark {
+  --panel:      28  25  21;   /* #1C1915 — raised ink */
+  --sunk:       12  11   9;
+  --edge:       46  42  36;
+  --edge-2:     68  62  53;
+  --fg:        251 248 241;
+  --fg-muted:  201 191 173;
+  --fg-subtle: 163 152 134;
+  --accent:    255 106  69;   /* Vermilion, lifted */
+  --accent-2:  140 156 255;
+  color-scheme: dark;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    /* Sticky headers are 64px; anchors must clear them. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-canvas text-fg font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga", "calt";
+    /* Faint paper tooth — gives the flat ground the feel of a printed sheet. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Headings are set in Fraunces — a high-contrast editorial serif. */
+  h1, h2, h3, h4 {
+    @apply font-display text-fg;
+    letter-spacing: -0.018em;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+  }
+
+  /* Editorial emphasis: an accented word inside a headline turns italic. */
+  :is(h1, h2) :is(.text-accent, .text-saffron-500, .text-saffron-400, .text-saffron-600, .text-accent2) {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* One focus treatment across the whole product. Saffron, offset, always
+     visible — this is a tool people use on deadline day with a keyboard. */
+  :focus-visible {
+    outline: 2px solid #E0401F;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection { background: #F4B3A0; color: #16130F; }
+
+  /* Surfaces cross-fade rather than snap when the theme flips. Named
+     properties only — `all` here would animate every hover transition too. */
+  body, .panel, .panel-flat, .data-table thead th, .data-table tbody td {
+    transition: background-color .22s ease, border-color .22s ease, color .22s ease;
+  }
+
+  /* Form fields default to the sheet colour so a field without its own bg
+     class never falls back to the browser's grey. Utilities still override. */
+  input:not([type='checkbox']):not([type='radio']):not([type='range']), textarea, select {
+    background-color: rgb(var(--panel));
+    color: rgb(var(--fg));
+  }
+  ::placeholder { color: rgb(var(--fg-subtle)); opacity: 1; }
+
+  /* Figures line up in columns wherever they are compared. */
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENTS — the parts repeated often enough to be worth naming.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── Buttons ────────────────────────────────────────────────────────────
+     Exactly three. Primary is saffron and appears at most twice per viewport;
+     if a third turns up, one of them is not really a primary action. */
+  /* Named properties, never `transition-all`: `all` makes the browser watch
+     every animatable property including layout ones, and re-checks them on each
+     style recalc for the button's whole lifetime. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold whitespace-nowrap
+           rounded-card select-none
+           transition-[background-color,border-color,box-shadow,transform,color]
+           duration-150 ease-out;
+  }
+  /* Vibrant Orange #E0401F fill with Deep Navy text.
+     White on this orange measures 2.86:1 — unreadable, and it fails AA at every
+     size. Deep Navy on the same orange is 6.25:1, so the brand keeps its exact
+     CTA colour and the label stays legible. Hover goes to Warm Orange #F0583A
+     (7.6:1), which is the brand's own hover-adjacent tone. */
+  .btn-primary {
+    @apply btn bg-saffron-500 text-navy-900 shadow-cta
+           hover:bg-saffron-400 hover:shadow-cta-hover hover:-translate-y-px
+           active:translate-y-0 active:bg-saffron-600 active:text-white;
+  }
+  /* Inverts with the theme rather than being fixed navy: a navy button on a
+     navy card in dark mode is invisible. Light → dark button on white; dark →
+     light button on near-black. */
+  .btn-secondary {
+    @apply btn bg-fg text-canvas shadow-hair
+           hover:bg-fg/90 hover:-translate-y-px active:translate-y-0;
+  }
+  .btn-ghost {
+    @apply btn border border-edge-strong bg-panel text-fg
+           hover:border-fg hover:bg-fg hover:text-canvas;
+  }
+  /* Blue outline — the hero's secondary action. Trust/technology sitting beside
+     the orange call to action, never competing with it for the click. */
+  /* Uses the theme-aware blue, not a fixed one: Primary Blue #2A3FBF is
+     unreadable on a dark panel (2.3:1). `accent2` resolves to #2A3FBF on light
+     and #8C9CFF on dark, so the same button works on both grounds. */
+  .btn-outline-blue {
+    @apply btn border-2 border-accent2 bg-transparent text-accent2
+           hover:bg-accent2 hover:text-panel hover:-translate-y-px active:translate-y-0;
+  }
+  .btn-outline-blue-dark {
+    @apply btn border-2 border-azure-400 bg-azure-400/[.08] text-azure-400
+           hover:bg-azure-400 hover:text-navy-900 hover:-translate-y-px active:translate-y-0;
+  }
+
+  /* On dark grounds the ghost inverts. */
+  .btn-ghost-dark {
+    @apply btn border border-white/25 bg-white/[.04] text-white
+           hover:bg-white hover:text-navy-900 hover:border-white;
+  }
+  .btn-lg { @apply px-7 py-3.5 text-[15px]; }
+  .btn-md { @apply px-5 py-2.5 text-sm; }
+  .btn-sm { @apply px-3.5 py-2 text-[13px]; }
+
+  /* ── Surfaces ──────────────────────────────────────────────────────────── */
+  .panel      { @apply bg-panel border border-edge rounded-panel shadow-card; }
+  .panel-flat { @apply bg-panel border border-edge rounded-panel; }
+  .panel-dark { @apply bg-navy-800 border border-navy-700 rounded-panel; }
+
+  /* ── Eyebrow — the small mono label above a section heading. ───────────── */
+  .eyebrow {
+    @apply font-mono uppercase text-eyebrow;
+  }
+
+  /* ── Chips / status pills ──────────────────────────────────────────────── */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-chip border px-2 py-[3px]
+           font-mono text-[10.5px] uppercase tracking-[0.1em] font-semibold whitespace-nowrap;
+  }
+  .chip-ok   { @apply chip border-sage-500/40   bg-sage-500/10   text-sage-600 dark:text-sage-300; }
+  .chip-warn { @apply chip border-amber-500/40  bg-amber-500/10  text-amber-700 dark:text-amber-300; }
+  .chip-risk { @apply chip border-red-500/[.35]    bg-red-500/10    text-[#B42318] dark:text-red-300; }
+  /* Info is the logo blue — the cool half of the pair. It reads as "recorded,
+     in progress" against saffron's "act on this", so the two never compete. */
+  .chip-info { @apply chip border-azure-500/40 bg-azure-500/[.12] text-accent2; }
+  .chip-idle { @apply chip border-edge-strong  bg-sunk text-fg-subtle; }
+  .chip-live { @apply chip border-saffron-500/[.45] bg-saffron-500/[.12] text-accent; }
+
+  /* ── Data table — dense, scannable, government-grade. ──────────────────── */
+  .data-table { @apply w-full text-sm border-collapse; }
+  .data-table thead th {
+    @apply bg-sunk text-left font-mono text-[10.5px] uppercase tracking-[0.12em]
+           text-fg-muted font-semibold px-4 py-2.5 border-b border-edge whitespace-nowrap;
+  }
+  .data-table tbody td {
+    @apply px-4 py-3 border-b border-edge text-fg-muted align-middle;
+  }
+  .data-table tbody tr { @apply transition-colors; }
+  .data-table tbody tr:hover { @apply bg-saffron-500/[.07]; }
+  .data-table .num { @apply font-mono tnum text-right text-fg; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+@layer utilities {
+
+  /* ── Grounds ────────────────────────────────────────────────────────────
+     A blueprint grid, not decoration: it says "measured document" and keeps
+     large dark areas from going flat. */
+  /* Ruled ledger lines plus a single margin rule — a printed page, not a grid. */
+  .bg-grid {
+    background-image:
+      linear-gradient(90deg, transparent 63px, rgba(194,54,26,.18) 63px, rgba(194,54,26,.18) 64px, transparent 64px),
+      linear-gradient(rgba(22,19,15,.055) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 32px;
+  }
+  .bg-grid-dark {
+    background-image:
+      linear-gradient(90deg, transparent 63px, rgba(255,106,69,.22) 63px, rgba(255,106,69,.22) 64px, transparent 64px),
+      linear-gradient(rgba(243,238,227,.05) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 32px;
+  }
+  .bg-dots-dark {
+    background-image: radial-gradient(circle, rgba(255,255,255,.09) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  /* The logo, rendered as light. Its saffron gradient sits top-right and its
+     blue gradient bottom-left, in the same relationship as the two interlocking
+     links in the mark. One glow per dark band — never gradient soup. */
+  .bloom-brand {
+    background:
+      radial-gradient(48% 44% at 86% 10%, rgba(224, 64, 31, .20), transparent 64%),
+      radial-gradient(60% 50% at  0% 100%, rgba(243, 238, 227, .06), transparent 70%);
+  }
+  /* Fades a grid or panel out at the bottom edge instead of cutting it. */
+  .mask-fade-b { -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent); }
+  .mask-fade-r { -webkit-mask-image: linear-gradient(to right, #000 72%, transparent); mask-image: linear-gradient(to right, #000 72%, transparent); }
+
+  /* ── Rules ──────────────────────────────────────────────────────────────
+     Structure is carried by hairlines rather than by boxes and shadows. */
+  .rule-accent { @apply border-t-2 border-saffron-500; }
+  .rule-strong { @apply border-t-2 border-navy-900; }
+
+  /* ── Reveal on scroll ────────────────────────────────────────────────────
+     A shorter travel over a slightly longer duration reads as smoother than a
+     long travel done fast — the eye tracks the settle, not the distance.
+     `will-change` promotes the block for the duration of the animation only;
+     `.reveal-in` drops the hint so idle sections keep no extra layers. */
+  .reveal-up {
+    opacity: 0; transform: translate3d(0, 14px, 0);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    will-change: opacity, transform;
+  }
+  .reveal-fade { opacity: 0; transition: opacity .7s cubic-bezier(.22,1,.36,1); will-change: opacity; }
+  .reveal-in   { opacity: 1; transform: none; will-change: auto; }
+  .reveal-fade.reveal-in { opacity: 1; }
+
+  /* ── Motion vocabulary ─────────────────────────────────────────────────── */
+  /* translate3d, not translateY: the 3d form guarantees a compositor layer, so
+     a card lift never repaints the grid behind it. */
+  .lift { transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s ease, border-color .2s ease; }
+  .lift:hover { transform: translate3d(0, -2px, 0); }
+
+  /* A live process gets one moving element and no more.
+     The ring is a pseudo-element animating transform + opacity only. The old
+     box-shadow spread animation repainted the dot and its backdrop every frame. */
+  .dot-live { position: relative; }
+  .dot-live::after {
+    content: ""; position: absolute; inset: -3px; border-radius: 9999px;
+    border: 1.5px solid rgb(224 64 31 / .55);
+    animation: live-ring 2s cubic-bezier(.4, 0, .6, 1) infinite;
+    pointer-events: none;
+  }
+  @keyframes live-ring {
+    0%   { transform: scale(.55); opacity: .9; }
+    100% { transform: scale(1.7);  opacity: 0; }
+  }
+
+  /* Soft glow behind a card on hover. Blue = trust and technology; the icon
+     flips to orange so the eye lands on the action, not the container.
+     opacity-only transition, so it stays on the compositor. */
+  .card-glow { position: relative; isolation: isolate; }
+  .card-glow::before {
+    content: ""; position: absolute; inset: -1px; border-radius: inherit; z-index: -1;
+    background: radial-gradient(140px circle at 50% 0%, rgb(var(--glow, 42 63 191) / .22), transparent 72%);
+    opacity: 0; transition: opacity .3s ease; pointer-events: none;
+  }
+  .card-glow:hover::before { opacity: 1; }
+  .glow-orange { --glow: 224 64 31; }
+
+  /* Slow vertical drift for decorative marks. Transform only. */
+  @keyframes float-y {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50%      { transform: translate3d(0, -10px, 0); }
+  }
+  .float-y      { animation: float-y 7s ease-in-out infinite; }
+  .float-y-slow { animation: float-y 11s ease-in-out infinite; }
+
+  /* Confines a repeatedly-animating block's reflow and repaint to itself, so a
+     ticking panel cannot force the rest of the page to re-layout with it. */
+  .contain-paint { contain: layout paint; }
+
+  /* Decorative full-bleed grounds — grids, blooms. Promoting them to their own
+     layer stops the browser re-rasterising a viewport-sized gradient every time
+     anything above it moves. */
+  .layer { transform: translateZ(0); will-change: transform; }
+  /* For elements that animate their own transform and so cannot take
+     `.layer`'s translateZ(0) — this promotes without overwriting. */
+  .backface-hidden { backface-visibility: hidden; }
+
+  /* Route change: content settles in rather than snapping. Opacity only — a
+     translate here fights the browser's own scroll restoration. */
+  .page-enter { animation: page-enter .32s cubic-bezier(.22, 1, .36, 1) both; }
+  @keyframes page-enter { from { opacity: 0 } to { opacity: 1 } }
+
+  /* Shimmer band for loading rows. */
+  .skeleton { @apply relative overflow-hidden bg-sunk; }
+  .skeleton::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgb(var(--panel) / .9), transparent);
+    animation: sweep 1.6s infinite;
+  }
+
+  /* Underline that draws in on hover — nav and inline links. */
+  .link-grow { position: relative; }
+  .link-grow::after {
+    content: ""; position: absolute; left: 0; right: 100%; bottom: -3px; height: 2px;
+    background: #E0401F; transition: right .25s cubic-bezier(.22,1,.36,1);
+  }
+  .link-grow:hover::after { right: 0; }
+
+  /* ── Stagger ───────────────────────────────────────────────────────────── */
+  .stagger > *:nth-child(1)  { transition-delay: 0ms; }
+  .stagger > *:nth-child(2)  { transition-delay: 60ms; }
+  .stagger > *:nth-child(3)  { transition-delay: 120ms; }
+  .stagger > *:nth-child(4)  { transition-delay: 180ms; }
+  .stagger > *:nth-child(5)  { transition-delay: 240ms; }
+  .stagger > *:nth-child(6)  { transition-delay: 300ms; }
+  .stagger > *:nth-child(7)  { transition-delay: 360ms; }
+  .stagger > *:nth-child(8)  { transition-delay: 420ms; }
+  .stagger > *:nth-child(9)  { transition-delay: 480ms; }
+  .stagger > *:nth-child(10) { transition-delay: 540ms; }
+  .stagger > *:nth-child(11) { transition-delay: 600ms; }
+  .stagger > *:nth-child(12) { transition-delay: 660ms; }
+
+  /* ── Scrollbars ────────────────────────────────────────────────────────── */
+  .scrollbar-thin { scrollbar-width: thin; scrollbar-color: #C9BFAD transparent; }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background-color: #C9BFAD; border-radius: 3px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+
+  /* ── Legacy shims — classes referenced by not-yet-migrated product files. */
+  .bg-cream      { background-color: rgb(var(--panel)); }
+  .bg-paper-cool { background-color: rgb(var(--canvas)); }
+  .bg-ink-paper  { background-color: #16130F; }
+  .paper-grain   { background-color: transparent; }
+  .card-hover    { transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s ease; }
+  .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -12px rgba(22,19,15,.14); }
+}

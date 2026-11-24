@@ -1,0 +1,52 @@
+# ── Dependencies (regenerable — 390 MB) ───────────────────────────────
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# ── Build output ──────────────────────────────────────────────────────
+dist/
+backend/frontend/dist/
+*.tsbuildinfo
+
+# ── SECRETS — never commit ────────────────────────────────────────────
+# Live API keys. Once in git history they are effectively permanent,
+# even in a private repo. Use .env.example as the template instead.
+.env
+.env.*
+!.env.example
+!.env.aws.example
+.env.aws
+*.pem
+*.key
+
+# ── Data ──────────────────────────────────────────────────────────────
+# Contains real users and password hashes. Backed up separately.
+*.db
+*.sqlite
+*.sqlite3
+uploads/*
+!uploads/.gitkeep
+tender_document_cache/
+
+# ── Deploy artefacts (84 MB of old bundles) ───────────────────────────
+*.zip
+
+# ── OS / editor ───────────────────────────────────────────────────────
+.DS_Store
+.vscode/
+.idea/
+
+# ── Compiled SPA bundles ──────────────────────────────────────────────
+# Stale copies of built output from May–Aug, regenerable with `npm run build`.
+# The .htaccess and config.js inside them ARE kept — those carry real
+# deployment knowledge (SPA rewrite rules, and the API_URL setting whose
+# misconfiguration broke production).
+backend/frontend/assets/
+backend/frontend/index.html
+*.bak-*
+*.bak
+
+# ── Local production-like stack (deploy/local-stack.sh) ─────────────────
+.local-stack/

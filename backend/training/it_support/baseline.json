@@ -1,0 +1,31 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "it-support",
+  "dataset_case": "it_oversized_upload_413",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "reference-self-check",
+      "scorer_version": "1.0.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All incident sections, evidence, recovery steps, and security controls covered",
+        "Oversized file correctly isolated as the confirmed cause",
+        "Portal outage and submission success remain unverified",
+        "Credentials and DSC secrets explicitly protected"
+      ]
+    },
+    {
+      "name": "live-before-and-after",
+      "scorer_version": "1.0.0",
+      "score": null,
+      "passed": false,
+      "status": "pending-provider-quota",
+      "observed_gaps": [
+        "All configured LLM providers reported exhausted quota on 2026-09-10"
+      ]
+    }
+  ],
+  "note": "Synthetic locked incident. Live scoring is pending provider capacity; never store real credentials or bid secrets in evaluation data."
+}

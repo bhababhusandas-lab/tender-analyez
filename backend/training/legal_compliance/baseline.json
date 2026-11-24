@@ -1,0 +1,34 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "legal-compliance",
+  "dataset_case": "lc_managed_services_risk",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "before-response-contract",
+      "scorer_version": "1.0.0",
+      "score": 60.86,
+      "passed": false,
+      "observed_gaps": [
+        "Only 2 of 5 required sections found",
+        "Only 2 of 5 critical risk concepts found",
+        "Only 6 of 7 exact exposure figures found",
+        "No complete pre-bid questions found"
+      ]
+    },
+    {
+      "name": "after-response-contract",
+      "scorer_version": "1.2.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All 5 required legal-review sections present",
+        "All 5 critical clause concepts and all 7 exposure figures present",
+        "18 clause-review rows produced against a minimum of 8",
+        "Three complete numbered pre-bid questions produced",
+        "No invented liability cap, arbitration or force-majeure protection"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case; this evaluator does not replace qualified legal review."
+}

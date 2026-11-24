@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#16130F" />
+    <title>Unique Type — AI analysis for government tenders</title>
+    <meta name="description" content="Upload a tender and an 11-specialist AI team analyses it: eligibility, compliance matrix, BOQ costing, legal review and a bid / no-bid recommendation." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fraunces — editorial serif for headlines. Instrument Sans — interface.
+         IBM Plex Mono — figures, references, BOQ lines. -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..800,0..100;1,9..144,400..800,0..100&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- Resolve the theme BEFORE first paint. Without this the page renders in
+         the default light theme and then snaps to dark once React mounts —
+         a white flash on every load for dark-theme users. Must stay inline
+         and stay in <head>. -->
+    <script>
+      (function () {
+        try {
+          var c = localStorage.getItem('taa-theme') || 'system';
+          var dark = c === 'dark' || (c === 'system' &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/config.js"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

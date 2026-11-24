@@ -1,0 +1,35 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "finance-accounts",
+  "dataset_case": "fa_laptop_boq",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "before-response-contract",
+      "scorer_version": "1.0.0",
+      "score": 55.5,
+      "passed": false,
+      "observed_gaps": [
+        "Only 1 of 5 required sections found",
+        "Only 2 of 5 financing and payment risks covered",
+        "Only 4 of 8 verified calculations repeated",
+        "Missing-tender-term labels absent",
+        "BOQ expanded far beyond the verified cost inputs"
+      ]
+    },
+    {
+      "name": "after-grounding-contract",
+      "scorer_version": "1.3.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All 5 required finance sections present",
+        "All supplied figures and 8 verified calculations preserved",
+        "15 BOQ rows produced against a minimum of 10",
+        "Working-capital, payment, EMD, PBG and price-lock risks covered",
+        "Unsupported generic tender terms removed or explicitly labelled not specified"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case; all live financial outputs still require authorised human approval."
+}

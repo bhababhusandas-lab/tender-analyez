@@ -1,0 +1,33 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "technical-expert",
+  "dataset_case": "te_cctv_compliance_gap",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "before-response-contract",
+      "scorer_version": "1.0.0",
+      "score": 74.25,
+      "passed": false,
+      "observed_gaps": [
+        "Only 2 of 5 required sections found",
+        "Only 3 of 4 exact numeric facts found",
+        "No five-paragraph Methodology section found"
+      ]
+    },
+    {
+      "name": "after-response-contract",
+      "scorer_version": "1.1.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All 5 required sections present",
+        "All grounded requirements and figures present",
+        "31 compliance rows produced against a minimum of 10",
+        "Five full methodology paragraphs present",
+        "Missing ONVIF, ISO 27001 and site-survey evidence correctly identified"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case. Procurement-expert review is still required before production claims."
+}

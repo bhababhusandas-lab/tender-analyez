@@ -1,0 +1,35 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "bid-pricing",
+  "dataset_case": "bp_laptop_no_market_data",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "before-grounding-contract",
+      "scorer_version": "1.0.0",
+      "score": 76.75,
+      "passed": false,
+      "observed_gaps": [
+        "Only 1 of 5 required sections found",
+        "Only 6 of 8 verified calculations matched",
+        "Required verified-absence label for historical L1 data was missing",
+        "An unsupported mobilisation-advance assumption was introduced"
+      ]
+    },
+    {
+      "name": "after-grounding-contract",
+      "scorer_version": "1.0.0",
+      "score": 90.62,
+      "passed": true,
+      "observed_strengths": [
+        "All 5 required pricing sections present",
+        "All supplied source figures preserved",
+        "Minimum-margin, target-margin, and stress scenarios shown with formulas",
+        "Historical L1 evidence explicitly labelled unavailable",
+        "No invented competitor or market claims detected",
+        "One exact tax-inclusive quote recommended with human approval required"
+      ]
+    }
+  ],
+  "note": "Synthetic locked case; all live pricing outputs still require authorised human approval."
+}

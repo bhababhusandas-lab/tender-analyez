@@ -1,0 +1,30 @@
+{
+  "baseline_date": "2026-09-10",
+  "agent": "market-intelligence",
+  "dataset_case": "mi_fictional_it_awards",
+  "pass_threshold": 80.0,
+  "runs": [
+    {
+      "name": "reference-self-check",
+      "scorer_version": "1.0.0",
+      "score": 100.0,
+      "passed": true,
+      "observed_strengths": [
+        "All supplied sources, dates, awards, quantities, and values preserved",
+        "Competitor counts remain limited to the three-record sample",
+        "Draft planning signal kept separate from a confirmed tender",
+        "All missing opportunity details explicitly left unconfirmed",
+        "No invented market or policy claim"
+      ]
+    },
+    {
+      "name": "live-before-and-after",
+      "scorer_version": "1.0.0",
+      "score": null,
+      "passed": false,
+      "status": "pending-provider-quota",
+      "observed_gaps": ["Live scoring deferred because all configured LLM providers are out of quota"]
+    }
+  ],
+  "note": "All organisations and records are fictional; current market conclusions require fresh authoritative sources and human review."
+}
